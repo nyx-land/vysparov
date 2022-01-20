@@ -1,3 +1,6 @@
+(defpackage :vysparov
+  (:use :cl))
+
 (in-package :vysparov)
 
 (defun split (delimiter str)
