@@ -1,5 +1,10 @@
 (defpackage :vysparov
-  (:use :cl))
+  (:nicknames :vy)
+  (:use :cl)
+  (:export :split
+           :dict
+           :hyphenate
+           :deepset))
 
 (in-package :vysparov)
 
