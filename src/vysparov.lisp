@@ -23,6 +23,7 @@
     out-hash))
 
 (defun hyphenate (in-str)
+  "Hyphenate a string"
   (string-downcase
    (concatenate 'string
                 (loop for x across in-str
@@ -32,6 +33,8 @@
                         collect x))))
 
 (defmacro deepset (table &rest keys)
+  "A horrendous macro for setting a nested hash table.
+Badly in need of rewriting."
   `(progn
      (setf (gethash ,(car (last keys 2))
                     ,(reduce
@@ -43,10 +46,3 @@
                       (reverse (rest (rest (reverse keys))))
                       :initial-value table))
            ,(cadr (last keys 2)))))
-
-(defun pathkey (path)
-  (if (equalp path "/")
-      (intern path "KEYWORD")
-      (mapcar (lambda (x) (intern x "KEYWORD"))
-              (remove-if (lambda (x) (equalp x ""))
-                         (uiop:split-string path :separator "/")))))
