@@ -29,13 +29,12 @@
 
 (defun hyphenate (in-str)
   "Hyphenate a string"
-  (string-downcase
-   (concatenate 'string
-                (loop for x across in-str
-                      if (equalp x #\Space)
-                        collect #\-
-                      else
-                        collect x))))
+  (loop for x across in-str
+        if (equalp x #\Space)
+          collect #\- into str
+        else
+          collect x into str
+        finally (return (concatenate 'string str))))
 
 (defmacro deepset (table &rest keys)
   "A horrendous macro for setting a nested hash table.
