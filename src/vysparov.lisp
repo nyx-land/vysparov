@@ -4,7 +4,9 @@
   (:export :split
            :dict
            :hyphenate
-           :deepset))
+           :deepset
+           :str->octets
+           :octets->str))
 
 (in-package :vysparov)
 
@@ -52,4 +54,9 @@ Badly in need of rewriting."
            ,(cadr (last keys 2)))))
 
 (defun str->octets (str)
+  "A simple little string to octet function"
   (map 'vector #'char-code str))
+
+(defun octets->str (vec)
+  "A simple little octet to string function"
+  (map 'string #'code-char vec))
