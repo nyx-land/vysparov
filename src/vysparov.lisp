@@ -6,7 +6,8 @@
            :hyphenate
            :deepset
            :str->octets
-           :octets->str))
+           :octets->str
+           :cconv))
 
 (in-package :vysparov)
 
@@ -52,6 +53,10 @@ Badly in need of rewriting."
                       (reverse (rest (rest (reverse keys))))
                       :initial-value table))
            ,(cadr (last keys 2)))))
+
+(defun cconv (ctype vec)
+  "Convert from one collection to another"
+  (map ctype #'identity vec))
 
 (defun str->octets (str)
   "A simple little string to octet function"
