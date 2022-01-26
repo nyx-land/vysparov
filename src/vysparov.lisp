@@ -55,7 +55,7 @@ Badly in need of rewriting."
 
 (defun str->octets (str)
   "A simple little string to octet function"
-  (map 'vector #'char-code str))
+  (map '(vector (unsigned-byte 8)) #'char-code str))
 
 (defun octets->str (vec)
   "A simple little octet to string function"
