@@ -50,3 +50,6 @@ Badly in need of rewriting."
                       (reverse (rest (rest (reverse keys))))
                       :initial-value table))
            ,(cadr (last keys 2)))))
+
+(defun str->octets (str)
+  (map 'vector #'char-code str))
