@@ -4,7 +4,7 @@
   (:export :split
            :dict
            :hyphenate
-           :deepset
+           :sethash
            :str->octets
            :octets->str
            :cconv))
@@ -39,20 +39,19 @@
           collect x into str
         finally (return (concatenate 'string str))))
 
-(defmacro deepset (table &rest keys)
-  "A horrendous macro for setting a nested hash table.
-Badly in need of rewriting."
-  `(progn
-     (setf (gethash ,(car (last keys 2))
-                    ,(reduce
-                      (lambda (table key)
-                        (if (gethash key (eval table))
-                            `(gethash ,key ,table)
-                            `(setf (gethash ,key ,table)
-                                   (make-hash-table))))
-                      (reverse (rest (rest (reverse keys))))
-                      :initial-value table))
-           ,(cadr (last keys 2)))))
+(defun sethash (table &rest keys)
+  "A more reasonable way of setting nested hashtables."
+  (let ((end (car (last keys)))
+        (vals (butlast keys)))
+    (loop for x in vals
+          with y = table
+          if (gethash x y)
+            do (setf y (gethash x y))
+          else
+            do (progn
+                 (setf (gethash x y) (make-hash-table))
+                 (setf y (gethash x y)))
+          finally (setf (gethash x y) end))))
 
 (defun cconv (ctype vec)
   "Convert from one collection to another"
