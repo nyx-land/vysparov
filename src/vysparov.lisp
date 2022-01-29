@@ -35,10 +35,10 @@
 character)."
   (loop for x across str
         if (equalp x #\Space)
-          collect c into str
+          collect c into out-str
         else
-          collect x into str
-        finally (return (concatenate 'string str))))
+          collect x into out-str
+        finally (return (concatenate 'string out-str))))
 
 (defun sethash (table &rest keys)
   "A more reasonable way of setting nested hashtables."
