@@ -3,7 +3,7 @@
   (:use :cl)
   (:export :split
            :dict
-           :hyphenate
+           :xyphenate
            :sethash
            :str->octets
            :octets->str
@@ -30,11 +30,12 @@
           do (setf (gethash x out-hash) y))
     out-hash))
 
-(defun hyphenate (in-str)
-  "Hyphenate a string"
-  (loop for x across in-str
+(defun xyphenate (str c)
+  "xyphenate a string (hyphenation with an arbitrary
+character)."
+  (loop for x across str
         if (equalp x #\Space)
-          collect #\- into str
+          collect c into str
         else
           collect x into str
         finally (return (concatenate 'string str))))
