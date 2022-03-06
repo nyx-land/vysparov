@@ -1,18 +1,8 @@
-(defpackage :vysparov
-  (:nicknames :vy)
-  (:use :cl)
-  (:export :split
-           :dict
-           :xyphenate
-           :sethash
-           :str->octets
-           :octets->str
-           :cconv))
-
 (in-package :vysparov)
 
 (defun split (delimiter str)
-  "A bespoke string splitting function"
+  "A bespoke string splitting function. Horrendous, needs
+to be rewritten."
   (labels ((ss (s) (search delimiter str :start2 s)) ;; sorry
            (sx (z) (if (ss z) (ss z) (length str)))
            (sy (q) (search delimiter str :end2 q :from-end t)))
@@ -23,18 +13,34 @@
           finally (return (append pg (list (subseq str y (sx x))))))))
 
 (defun dict (&rest vals)
-  "Make a hash table in one go"
-  (let ((out-hash (make-hash-table)))
-    (loop for (x y) on vals
-          by #'cddr
-          do (setf (gethash x out-hash) y))
-    out-hash))
+  "Make a hash table in one go. :TEST is a reserved value that
+needs to be passed first to change the hash-table test, e.g. to
+use strings as keys."
+  (let ((out-hash (if (equalp (first vals) :test)
+                      (make-hash-table :test (second vals))
+                      (make-hash-table))))
+        (loop for (x y) on vals
+              by #'cddr
+              unless (equalp x :test)
+              do (setf (gethash x out-hash) y))
+        out-hash))
 
-(defun xyphenate (str c)
+(defun hashkeys (table)
+  "Return a list of a hash table's keys"
+  (loop for k being the hash-key of table
+        collect k))
+
+(defun hashvals (table)
+  "Return a list of a hash table's values"
+  (loop for k being the hash-key
+          using (hash-value v) of table
+        collect v))
+
+(defun xyphenate (str d c)
   "xyphenate a string (hyphenation with an arbitrary
-character)."
+deliminter and hyphenating character)."
   (loop for x across str
-        if (equalp x #\Space)
+        if (equalp x d)
           collect c into out-str
         else
           collect x into out-str
@@ -58,10 +64,3 @@ character)."
   "Convert from one collection to another"
   (map ctype #'identity vec))
 
-(defun str->octets (str)
-  "A simple little string to octet function"
-  (map '(vector (unsigned-byte 8)) #'char-code str))
-
-(defun octets->str (vec)
-  "A simple little octet to string function"
-  (map 'string #'code-char vec))
