@@ -6,4 +6,5 @@
                 ((:file "package")
                  ;; (:file "parsing")
                  ;; (:file "bitsmashing")
-                 (:file "vysparov")))))
+                 (:file "vysparov")
+                 (:file "hash-tables")))))
