@@ -16,8 +16,7 @@
   "A utility function to print the values of a hash-table"
   (loop for k being the hash-key
           using (hash-value v) of table
-        if (> v 0)
-          collect (format nil "~a: ~a~%" (code-char k) v)))
+        do (format t "~a: ~a~%" k v)))
 
 (defun hashkeys (table)
   "Return a list of a hash table's keys"
