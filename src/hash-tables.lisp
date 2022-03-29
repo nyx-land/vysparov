@@ -1,3 +1,5 @@
+(in-package :vysparov)
+
 (defun copy-hash-table (hash-table)
   "A utility function to copy a hash table."
   (let ((table (make-hash-table
