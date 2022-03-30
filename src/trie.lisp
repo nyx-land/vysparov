@@ -2,11 +2,6 @@
   val
   (children (list)))
 
-(defstruct char-soup
-  (starts nil)
-  (ends nil)
-  (pos 0))
-
 (defun tr-lookup (key root)
   (if (= (length key) 0)
       (tr-node-val root)
