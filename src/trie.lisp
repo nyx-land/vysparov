@@ -1,3 +1,5 @@
+(in-package :vysparov)
+
 (defstruct tr-node
   val
   (children (list)))

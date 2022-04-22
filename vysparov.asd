@@ -7,4 +7,5 @@
                  ;; (:file "parsing")
                  ;; (:file "bitsmashing")
                  (:file "vysparov")
-                 (:file "hash-tables")))))
+                 (:file "hash-tables")
+                 (:file "trie")))))

@@ -11,6 +11,9 @@
            :sethash
            :str->octets
            :octets->str
-           :cconv))
+           :cconv
+           :make-tr-node
+           :tr-add
+           :tr-lookup))
 
 (in-package :vysparov)
