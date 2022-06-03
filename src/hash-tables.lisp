@@ -29,3 +29,27 @@ use strings as keys."
               unless (equalp x :test)
               do (setf (gethash x out-hash) y))
         out-hash))
+
+(defgeneric hash-normalize (input)
+  (:documentation "Normalize a hash-table for selecting it from WITH-KEYS. By default
+it just returns the value, if it doesn't need to be normalized.")
+  (:method (input)
+    input))
+
+(defmethod hash-normalize ((input string))
+  (read-from-string (xyphenate input #\space #\-)))
+
+(defmethod hash-normalize ((input hash-table))
+  (let ((tn (make-hash-table)))
+    (loop for k being the hash-key of input
+          for kn = (hash-normalize k)
+          do (setf (gethash kn tn)
+                   (gethash k input))
+          finally (return tn))))
+
+(defmacro with-keys ((&rest keys) table &body body)
+  `(let ,(loop for k in keys
+               with tn = (hash-normalize (eval table))
+               unless (null (gethash k tn))
+                 collect `(,k ,(gethash k tn)))
+     ,@body))

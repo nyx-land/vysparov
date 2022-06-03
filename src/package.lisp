@@ -5,6 +5,7 @@
            :dict
            :hashkeys
            :hashvals
+           :with-keys
            :hash-print
            :xyphenate
            :sethash
