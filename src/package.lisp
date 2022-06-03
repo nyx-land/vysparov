@@ -2,11 +2,12 @@
   (:nicknames :vy)
   (:use :cl)
   (:export :split
-           :dict
+           :copy-hash-table
+           :hash-print
            :hashkeys
            :hashvals
+           :dict
            :with-keys
-           :hash-print
            :xyphenate
            :sethash
            :str->octets
