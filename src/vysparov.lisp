@@ -3,14 +3,10 @@
 (defun split (delimiter str)
   "A bespoke string splitting function. Horrendous, needs
 to be rewritten."
-  (labels ((ss (s) (search delimiter str :start2 s)) ;; sorry
-           (sx (z) (if (ss z) (ss z) (length str)))
-           (sy (q) (search delimiter str :end2 q :from-end t)))
-    (loop for x = (sx 0) then (sx (incf x))
-          for y = 0 then (+ (length delimiter) (sy x))
-          until (equalp x (length str))
-          collect (subseq str y (sx x)) into pg
-          finally (return (append pg (list (subseq str y (sx x))))))))
+  (loop for i = 0 then (incf j)
+        as j = (position delimiter str :start i)
+        collect (subseq str i j)
+        while j))
 
 (defun xyphenate (str d c)
   "xyphenate a string (hyphenation with an arbitrary
