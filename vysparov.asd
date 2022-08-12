@@ -4,8 +4,8 @@
   :components ((:module "src"
                 :components
                 ((:file "package")
-                 ;; (:file "parsing")
-                 ;; (:file "bitsmashing")
+                 (:file "bitsmashing")
                  (:file "vysparov")
                  (:file "hash-tables")
-                 (:file "trie")))))
+                 (:file "trie")
+                 (:file "pathnames")))))
