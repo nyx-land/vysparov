@@ -1,4 +1,4 @@
-(in-package :vysparov)
+(in-package #:vysparov)
 
 (defun split (delimiter str)
   "A bespoke string splitting function. Horrendous, needs
