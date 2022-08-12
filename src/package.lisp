@@ -1,4 +1,4 @@
-(defpackage :vysparov
+(defpackage #:vysparov
   (:nicknames :vy)
   (:use :cl)
   (:export :split
