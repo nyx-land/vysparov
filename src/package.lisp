@@ -16,8 +16,6 @@
            :make-tr-node
            :tr-add
            :tr-lookup
-           :build-wild
-           :search-wild
            :peek-nth-chars))
 
 (in-package :vysparov)

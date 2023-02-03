@@ -7,5 +7,4 @@
                  (:file "bitsmashing")
                  (:file "vysparov")
                  (:file "hash-tables")
-                 (:file "trie")
-                 (:file "pathnames")))))
+                 (:file "trie")))))
