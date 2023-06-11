@@ -18,3 +18,11 @@ deliminter and hyphenating character)."
           collect x into out-str
         finally (return (concatenate 'string out-str))))
 
+(defun sub* (input new &rest chars)
+  "Substitute various characters at once"
+  (labels ((subfn (in chars)
+             (if (null chars)
+                 in
+                 (let ((old (pop chars)))
+                   (subfn (substitute new old in) chars)))))
+    (subfn input chars)))
