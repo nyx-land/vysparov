@@ -18,17 +18,3 @@ deliminter and hyphenating character)."
           collect x into out-str
         finally (return (concatenate 'string out-str))))
 
-(defun sethash (table &rest keys)
-  "A more reasonable way of setting nested hashtables."
-  (let ((end (car (last keys)))
-        (vals (butlast keys)))
-    (loop for x in vals
-          with y = table
-          if (gethash x y)
-            do (setf y (gethash x y))
-          else
-            do (progn
-                 (setf (gethash x y) (make-hash-table))
-                 (setf y (gethash x y)))
-          finally (setf (gethash x y) end))))
-
