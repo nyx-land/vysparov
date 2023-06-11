@@ -43,4 +43,10 @@ it just returns the value, if it doesn't need to be normalized.")
                  collect `(,k ,(gethash k tn)))
      ,@body))
 
-
+(defun deepget (table &rest keys)
+  (let ((next (gethash (car keys) table)))
+    (if (cdr keys)
+        (if (hash-table-p next)
+            (apply #'deepget (push next (cdr keys)))
+            next)
+        next)))
