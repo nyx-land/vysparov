@@ -3,12 +3,12 @@
   (map 'list
        (lambda (x)
          (merge-pathnames
-          path
           (make-pathname
-           :directory `(:absolute
+           :directory `(:relative
                         ,(if recursive :wild-inferiors :wild))
            :name :wild
-           :type (if x x :wild))))
+           :type (if x x :wild))
+          path))
        exts))
 
 (defun search-wild (wilds)
