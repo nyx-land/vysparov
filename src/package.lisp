@@ -7,6 +7,8 @@
    :dict :with-keys
    :deepget :deepset
    :make-tr-node :tr-add
-   :tr-lookup :peek-nth-chars))
+   :tr-lookup :peek-nth-chars
+   :build-wild :search-wild
+   :find-files))
 
 (in-package :vysparov)
