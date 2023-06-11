@@ -6,6 +6,7 @@
     :dict
     :with-keys
     :deepget
+    :deepset
     :xyphenate
     :sethash
     :str->octets
