@@ -32,7 +32,3 @@ deliminter and hyphenating character)."
                  (setf y (gethash x y)))
           finally (setf (gethash x y) end))))
 
-(defun cconv (ctype vec)
-  "Convert from one collection to another"
-  (map ctype #'identity vec))
-
