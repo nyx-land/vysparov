@@ -2,7 +2,7 @@
   (:nicknames :vy)
   (:use :cl)
   (:export
-   :split :sub* :xyphenate
+   :sub* :xyphenate
    :hash-print
    :dict :with-keys
    :deepget :deepset
