@@ -1,33 +1,10 @@
 (in-package :vysparov)
 
-(defun copy-hash-table (hash-table)
-  "A utility function to copy a hash table."
-  (let ((table (make-hash-table
-                :test (hash-table-test hash-table)
-                :rehash-size (hash-table-rehash-size hash-table)
-                :rehash-threshold (hash-table-rehash-threshold hash-table)
-                :size (hash-table-size hash-table))))
-    (loop for k being each hash-key of hash-table
-            using (hash-value v)
-          do (setf (gethash k table) v)
-          finally (return table))))
-
 (defun hash-print (table)
   "A utility function to print the values of a hash-table"
   (loop for k being the hash-key
           using (hash-value v) of table
         do (format t "~a: ~a~%" k v)))
-
-(defun hashkeys (table)
-  "Return a list of a hash table's keys"
-  (loop for k being the hash-key of table
-        collect k))
-
-(defun hashvals (table)
-  "Return a list of a hash table's values"
-  (loop for k being the hash-key
-          using (hash-value v) of table
-        collect v))
 
 (defun dict (&rest vals)
   "Make a hash table in one go. :TEST is a reserved value that
@@ -65,3 +42,5 @@ it just returns the value, if it doesn't need to be normalized.")
                unless (null (gethash k tn))
                  collect `(,k ,(gethash k tn)))
      ,@body))
+
+
