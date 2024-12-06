@@ -45,7 +45,7 @@ it just returns the value, if it doesn't need to be normalized.")
     `(progn
        ,(apply #'rec table hashes))))
 
-(defmacro destructure-hash (table hashes &body body)
+(defmacro with-destructured-hash (table hashes &body body)
   `(let ,(loop for h in hashes
                collect `(,(car h)
                          (gethash ,(cadr h) ,table)))

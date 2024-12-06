@@ -4,8 +4,7 @@
   (:export
    :sub* :xyphenate
    :hash-print
-   :dict :with-keys
-   :deepget :deepset
+   :dict :g# :with-destructured-hash
    :make-tr-node :tr-add
    :tr-lookup :peek-nth-chars
    :build-wild :search-wild
