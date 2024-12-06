@@ -1,21 +1,14 @@
-(defpackage :vysparov
+(defpackage #:vysparov
   (:nicknames :vy)
   (:use :cl)
-  (:export :split
-           :copy-hash-table
-           :hash-print
-           :hashkeys
-           :hashvals
-           :dict
-           :with-keys
-           :xyphenate
-           :sethash
-           :str->octets
-           :octets->str
-           :cconv
-           :make-tr-node
-           :tr-add
-           :tr-lookup
-           :peek-nth-chars))
+  (:export
+   :sub* :xyphenate
+   :hash-print
+   :dict :with-keys
+   :deepget :deepset
+   :make-tr-node :tr-add
+   :tr-lookup :peek-nth-chars
+   :build-wild :search-wild
+   :find-files))
 
 (in-package :vysparov)
