@@ -65,3 +65,18 @@ it just returns the value, if it doesn't need to be normalized.")
                unless (null (gethash k tn))
                  collect `(,k ,(gethash k tn)))
      ,@body))
+
+(defmacro g# (table &body hashes)
+  (labels ((rec (table &rest in)
+             (if (cdr in)
+                 (list 'gethash (car in)
+                       (apply #'rec table (cdr in)))
+                 (list 'gethash (car in) table))))
+    `(progn
+       ,(apply #'rec table hashes))))
+
+(defmacro destructure-hash (table hashes &body body)
+  `(let ,(loop for h in hashes
+               collect `(,(car h)
+                         (gethash ,(cadr h) ,table)))
+     ,@body))
