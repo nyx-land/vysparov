@@ -6,13 +6,18 @@
           using (hash-value v) of table
         do (format t "~a: ~a~%" k v)))
 
-(defmacro dict ((&key (test #'eql)) &body entries)
-  `(let ((out (make-hash-table :test ,test)))
-     (loop for i in ',entries
-           as k = (car i)
-           as v = (cadr i)
-           do (setf (gethash k out) v))
-     out))
+(defun dict (&rest vals)
+  "Make a hash table in one go. :TEST is a reserved value that
+needs to be passed first to change the hash-table test, e.g. to
+use strings as keys."
+  (let ((out-hash (if (equalp (first vals) :test)
+                      (make-hash-table :test (second vals))
+                      (make-hash-table))))
+        (loop for (x y) on vals
+              by #'cddr
+              unless (equalp x :test)
+              do (setf (gethash x out-hash) y))
+        out-hash))
 
 (defgeneric hash-normalize (input)
   (:documentation "Normalize a hash-table for selecting it from WITH-KEYS. By default
