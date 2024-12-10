@@ -6,7 +6,7 @@
           using (hash-value v) of table
         do (format t "~a: ~a~%" k v)))
 
-(defmacro dict ((&key (test 'eql)) &body entries)
+(defmacro dict ((&key (test #'eql)) &body entries)
   `(let ((out (make-hash-table :test ,test)))
      (loop for i in ',entries
            as k = (car i)
