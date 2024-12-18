@@ -18,3 +18,9 @@ deliminter and hyphenating character)."
                  (let ((old (pop chars)))
                    (subfn (substitute new old in) chars)))))
     (subfn input chars)))
+
+(defun sym->key (sym)
+  (intern (symbol-name sym) :keyword))
+
+(defun sym<-key (key)
+  (read-from-string (symbol-name key)))
