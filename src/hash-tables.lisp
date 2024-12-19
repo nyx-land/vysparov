@@ -6,8 +6,8 @@
           using (hash-value v) of table
         do (format t "~a: ~a~%" k v)))
 
-(defmacro dict ((&key (test #'eql)) &body entries)
-  `(let ((table (make-hash-table :test ,test)))
+(defmacro dict ((&key (test 'eql)) &body entries)
+  `(let ((table (make-hash-table :test #',test)))
      (loop for (k v) on (list ,@entries)
              by #'cddr
            do (setf (gethash k table) v))
