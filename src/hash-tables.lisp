@@ -30,14 +30,21 @@ it just returns the value, if it doesn't need to be normalized.")
                    (gethash k input))
           finally (return tn))))
 
+(defun hash-recur (table &rest in)
+  (if (cdr in)
+      (list 'gethash (car in)
+            (apply #'hash-recur table (cdr in)))
+      (list 'gethash (car in) table)))
+
 (defmacro g# (table &body hashes)
-  (labels ((rec (table &rest in)
-             (if (cdr in)
-                 (list 'gethash (car in)
-                       (apply #'rec table (cdr in)))
-                 (list 'gethash (car in) table))))
-    `(progn
-       ,(apply #'rec table hashes))))
+  `(values
+    ,(apply #'hash-recur table hashes)))
+
+(defmacro s# (table &body hashes)
+  `(values
+    (setf ,(apply #'hash-recur table (cdr hashes))
+          ,(car hashes))
+    ,table))
 
 (defmacro with-destructured-hash (table hashes &body body)
   `(let ,(loop for h in hashes
