@@ -37,8 +37,10 @@ it just returns the value, if it doesn't need to be normalized.")
       (list 'gethash (car in) table)))
 
 (defmacro g# (table &body hashes)
-  `(values
-    ,(apply #'hash-recur table hashes)))
+  `(multiple-value-bind (hash-table found-p)
+       ,(apply #'hash-recur table hashes)
+     (values
+      hash-table found-p)))
 
 (defmacro s# (table &body hashes)
   `(values
